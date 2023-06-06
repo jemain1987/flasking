@@ -4,6 +4,7 @@ environment {
   registry = "jjinwen/flask_app"
   registryCredentials = "docker"
   cluster_name = "skillstorm"
+  namespace = "jjinwen"
 }
 
   agent {
@@ -36,7 +37,30 @@ environment {
             dockerImage.push()
           }
         }
+    
       }
+    
+    stage('kubernetes') {
+      steps {
+        withcredentials([aws(accesskeyvariable: 'AWS_ACCESS_KEY_ID', credential: 'AWS', secretkeyvariable: "AWS_SECRET_ACCESS_KEY")]) {
+            // some block
+            sh "aws eks --region us-east-1 update-kubeconfig --name $(cluster_name)"
+            scripy {
+              try {
+                sh "kubectl create namespace $(namespave)"
+              }
+              catch (Exception e) {
+                echo "Error / namespace already created"
+              }
+              }
+          }
+        
+           sh "kubectl apply -f ./deployment.yaml -n $(namespace)"
+          sh "kubectl -n $(namespace) rollout restart deployment flaskcontainer"
+        
+        }
+      }
+    }
     }
 
   }
