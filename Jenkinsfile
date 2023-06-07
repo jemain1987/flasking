@@ -4,7 +4,7 @@ environment {
   registry = "jjinwen/flask_app"
   registryCredentials = "docker"
   cluster_name = "skillstorm"
-  namespace = "jjinwen"
+  namespace = "jjinwenflask"
 }
 
   agent {
