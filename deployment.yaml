@@ -1,28 +1,28 @@
 apiVersion: apps/v1 
 kind: Deployment 
 metadata: 
-  name:  jjinwenflask 
-  namespace:  jjinwenflask
+  name:  jjinwenflask
+  namespace: jjinwenflask
   labels: 
-    app:  flaskcontainer 
+    app:  jjinwenflask 
 spec: 
   selector: 
     matchLabels: 
-      app:  jjinwenflask
+      app: jjinwenflask 
   replicas: 1 
   strategy: 
     rollingUpdate: 
       maxSurge: 25% 
       maxUnavailable: 25% 
-    type: RollingUpdate 
+    type: RollingUpdate
   template: 
     metadata: 
       labels: 
-        app:  flaskcontainer 
+        app:  jjinwenflask 
     spec: 
       containers: 
       - name:  jjinwenflask 
-        image:  jjinwen/flask_app 
+        image:  jjinwen/flask_app
         resources: 
           requests: 
             cpu: 100m 
@@ -40,11 +40,11 @@ spec:
 apiVersion: v1 
 kind: Service 
 metadata: 
-  name: jjinwenflask
-  namespace: jjinwenflask 
+  name: jjinwenflask 
+  namespace: jjinwenflask
 spec: 
   selector: 
-    app: flaskcontainer 
+    app: jjinwenflask 
   type: LoadBalancer 
   sessionAffinity: None 
   sessionAffinityConfig: 
