@@ -1,14 +1,14 @@
 apiVersion: apps/v1 
 kind: Deployment 
 metadata: 
-  name:  flaskcontainer 
-  namespace: jjinwen 
+  name:  jjinwenflask 
+  namespace:  jjinwenflask
   labels: 
     app:  flaskcontainer 
 spec: 
   selector: 
     matchLabels: 
-      app: flaskcontainer 
+      app:  jjinwenflask
   replicas: 1 
   strategy: 
     rollingUpdate: 
@@ -21,7 +21,7 @@ spec:
         app:  flaskcontainer 
     spec: 
       containers: 
-      - name:  flaskcontainer 
+      - name:  jjinwenflask 
         image:  jjinwen/flask_app 
         resources: 
           requests: 
@@ -32,7 +32,7 @@ spec:
             memory: 100Mi 
         ports: 
         - containerPort:  5000 
-          name:  flaskcontainer 
+          name:  jjinwenflask 
         imagePullPolicy: Always 
       restartPolicy: Always 
  
@@ -40,8 +40,8 @@ spec:
 apiVersion: v1 
 kind: Service 
 metadata: 
-  name: flaskcontainer 
-  namespace: jjinwen 
+  name: jjinwenflask
+  namespace: jjinwenflask 
 spec: 
   selector: 
     app: flaskcontainer 
@@ -51,7 +51,7 @@ spec:
     clientIP: 
       timeoutSeconds: 10800 
   ports: 
-  - name: jjinwenflaskcontainer 
+  - name: jjinwenflask 
     protocol: TCP 
     port: 80 
     targetPort: 5000 
