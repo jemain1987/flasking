@@ -51,7 +51,7 @@ spec:
     clientIP: 
       timeoutSeconds: 10800 
   ports: 
-  - name: flaskcontainer 
+  - name: jjinwenflaskcontainer 
     protocol: TCP 
     port: 80 
     targetPort: 5000 
